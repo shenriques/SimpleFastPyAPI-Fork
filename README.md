@@ -103,9 +103,7 @@ Adds a new user to the system. The request body should include a JSON object wit
   - `password` (string, required): the password for the user
 
 ```console
-curl -X POST http://localhost:8000/users/
-   -H 'Content-Type: application/json'
-   -d '{"name":"Ali","password":"123456", "email": "AliAhmadi@gmail.com"}'
+curl -X POST http://localhost:8000/users/ -H 'Content-Type: application/json' -d '{"name":"Ali","password":"123456", "email": "AliAhmadi@gmail.com"}'
 ```
 Response:
 
@@ -130,9 +128,7 @@ Updates an existing user with the given user_id. The request body should include
   -  `email` (string): the new email address for the user
 
 ```console
-curl -X PUT http://localhost:8000/users/1
-     -H "Accept: application/json"
-     -d '{"name": "Reza", "email": "reza@yahoo.com"}'
+curl -X PUT http://localhost:8000/users/1 -H "Content-Type: application/json" -d '{"name": "Reza", "email": "reza@yahoo.com"}'
 ```
 Response:
 ```json
@@ -148,7 +144,7 @@ DELETE /users/{user_id}
 Deletes the user with the given user_id:
 
 ```console
-curl -X DELETE http://localhost:8000/2
+curl -X DELETE http://localhost:8000/users/4
 ```
 
 Response:
