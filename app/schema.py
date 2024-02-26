@@ -9,3 +9,8 @@ class UserCreate(BaseModel):
 class UserUpdate(BaseModel):
     name: str
     email: str
+
+class BookCreate(BaseModel):
+    title: str
+    author: str
+    description: str
