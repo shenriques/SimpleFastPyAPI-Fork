@@ -2,7 +2,7 @@ from fastapi import FastAPI, HTTPException, Depends
 from sqlalchemy.orm import Session
 from app.database import get_db
 from app.models import User, Book
-from app.schema import UserCreate, UserUpdate, BookCreate
+from app.schema import UserCreate, UserUpdate, BookCreate, BookUpdate
 
 
 
@@ -66,3 +66,13 @@ def create_book(book: BookCreate, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(new_book)
     return book
+
+@app.put("/books/{book_id}")
+def update_book(book_id: int, book: BookUpdate, db: Session = Depends(get_db)):
+    updated_book = db.query(Book).filter(Book.id == book_id).first()
+    if not updated_book:
+        raise HTTPException(status_code=404, detail="Book not found")
+    updated_book.title = book.title
+    updated_book.author = book.author
+    db.commit()
+    return {"message": "Book updated successfully"}

@@ -14,3 +14,7 @@ class BookCreate(BaseModel):
     title: str
     author: str
     description: str
+
+class BookUpdate(BaseModel):
+    title: str
+    author: str
