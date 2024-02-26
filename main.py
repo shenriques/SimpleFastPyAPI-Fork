@@ -48,6 +48,17 @@ def delete_user_by_email(user_id: int, db: Session = Depends(get_db)):
     db.commit()
     return {"message": "User deleted successfully"}
 
+@app.get("/books")
+def get_all_books(db: Session = Depends(get_db)):
+    return db.query(Book).all()
+
+@app.get("/books/{book_id}")
+def get_book(book_id: int, db: Session = Depends(get_db)):
+    book = db.query(Book).filter(Book.id == book_id).first()
+    if book:
+        return book
+    raise HTTPException(status_code=404, detail="Book not found")
+
 @app.post("/books")
 def create_book(book: BookCreate, db: Session = Depends(get_db)):
     new_book = Book(**book.dict()) # unpack the request rather than manually assigning
