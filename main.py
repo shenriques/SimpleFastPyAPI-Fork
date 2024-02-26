@@ -76,3 +76,12 @@ def update_book(book_id: int, book: BookUpdate, db: Session = Depends(get_db)):
     updated_book.author = book.author
     db.commit()
     return {"message": "Book updated successfully"}
+
+@app.delete("/books/{book_id}")
+def delete_book(book_id: int, db: Session = Depends(get_db)):
+    deleted_book = db.query(Book).filter(Book.id == book_id).first()
+    if not deleted_book:
+        raise HTTPException(status_code=404, detail="Book not found")
+    db.delete(deleted_book)
+    db.commit()
+    return {"message": "Book deleted successfully"}
