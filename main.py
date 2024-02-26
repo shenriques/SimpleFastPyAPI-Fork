@@ -82,7 +82,7 @@ def update_book(book_id: int, book: BookUpdate, db: Session = Depends(get_db)):
     db.commit()
     return {"message": "Book updated successfully"}
 
-@app.delete("/books/{book_id}")
+@app.delete("/books/{book_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_book(book_id: int, db: Session = Depends(get_db)):
     deleted_book = db.query(Book).filter(Book.id == book_id).first()
     if not deleted_book:
