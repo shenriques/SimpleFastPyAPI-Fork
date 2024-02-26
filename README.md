@@ -152,9 +152,9 @@ Response:
 {"message": "User deleted successfully"}
 ```
 
-### Add a new book
+### Create a new book
 
-Adds a new user to the system. The request body should include a JSON object with the following properties:
+Adds a new book to the system. The request body should include a JSON object with the following properties:
 
   - `title` (string, required): the name of the book
   - `author` (string, required): the author address of the book
