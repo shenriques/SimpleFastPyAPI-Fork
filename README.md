@@ -244,6 +244,19 @@ Response:
 }
 ```
 
+### Delete a book
+
+Deletes the book with the given book_id:
+
+```console
+curl -X DELETE http://localhost:8000/books/4
+```
+
+Response:
+```json
+{"message": "Book deleted successfully"}
+```
+
 
 ## License
 
