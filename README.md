@@ -188,22 +188,19 @@ Response:
 
 [
     {
-        "author":"Alan Moore",
-        "description":"Award winning graphic novel",
-        "id":1,
-        "title":"WatchMen"
+        "title":"Gods",
+        "author":"Stephen Fry"
     },
     {
-        "author":"Isaac Asimov",
-        "description":"Award winning novel",
-        "id":2,
-        "title":"The Gods Themselves"
+        "title":"Kings",
+        "author":"Stephen Fry"
     },
     {
-        "author":"P D James",
-        "description":"Award winning novel",
-        "id":3,
-        "title":"The Children of Men"
+        "title":"The Children of Men",
+        "author":"P D James"},
+    {
+        "title":"The Gods Themselves",
+        "author":"Isaac Asimov"
     }
 ]
 
@@ -220,10 +217,9 @@ curl http://localhost:8000/books/1 -H "Accept: application/json"
 Response:
 ```json
 {
-    "author":"Alan Moore",
-    "description":"Award winning graphic novel",
-    "id":1,
-    "title":"WatchMen"
+    "title":"WatchMen",
+    "author":"Alan Moore"
+    
 }
 ```
 
