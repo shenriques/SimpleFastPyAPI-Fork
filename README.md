@@ -157,7 +157,7 @@ Response:
 Adds a new book to the system. The request body should include a JSON object with the following properties:
 
   - `title` (string, required): the name of the book
-  - `author` (string, required): the author address of the book
+  - `author` (string, required): the author of the book
   - `description` (string, required): the description for the book
 
 ``` 
@@ -224,6 +224,23 @@ Response:
     "description":"Award winning graphic novel",
     "id":1,
     "title":"WatchMen"
+}
+```
+
+### Update an existing book
+
+Updates an existing book with the given book_id. The request body should include a JSON object with the following properties:
+
+  -  `title` (string): the new title for the book
+  -  `author` (string): the new author for the book
+
+```console
+curl -X PUT http://localhost:8000/books/3 -H "Content-Type: application/json" -d '{"title": "The Children of Mugs", "author": "P. G. James"}'
+```
+Response:
+```json
+{
+    "message": "Book updated successfully"
 }
 ```
 
