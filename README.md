@@ -152,6 +152,28 @@ Response:
 {"message": "User deleted successfully"}
 ```
 
+### Add a new book
+
+Adds a new user to the system. The request body should include a JSON object with the following properties:
+
+  - `title` (string, required): the name of the book
+  - `author` (string, required): the author address of the book
+  - `description` (string, required): the description for the book
+
+``` 
+curl -X POST http://localhost:8000/books -H 'Content-Type: application/json' -d '{"title":"WatchMen","author":"Alan Moore", "description": "Award winning graphic novel"}'
+```
+
+Response:
+
+```json
+{
+    "title": "WatchMen",
+    "author": "Alan Moore", 
+    "description": "Award winning graphic novel"
+}
+```
+
 ## License
 
 This project is licensed under the GPL-3.0 License - see the LICENSE file for details.
