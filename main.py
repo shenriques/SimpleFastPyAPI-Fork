@@ -2,8 +2,8 @@ from fastapi import FastAPI, HTTPException, Depends, status
 from sqlalchemy.orm import Session
 from app.database import get_db
 from app.models import User, Book
-from app.schema import UserCreate, UserUpdate, BookCreate, BookUpdate
-
+from app.schema import UserCreate, UserUpdate, BookCreate, BookUpdate, BookShow
+from typing import List
 
 
 app = FastAPI()
@@ -48,19 +48,21 @@ def delete_user_by_email(user_id: int, db: Session = Depends(get_db)):
     db.commit()
     return {"message": "User deleted successfully"}
 
-@app.get("/books")
+@app.get("/books", response_model=List[BookShow])
 def get_all_books(db: Session = Depends(get_db)):
-    books = db.query(Book).all()
-    if (len(books) == 0):
+    book_objects = db.query(Book).all()
+    if (len(book_objects) == 0):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No books in database.")
+    books = [BookShow(title=book.title, author=book.author) for book in book_objects]
     return books
 
-@app.get("/books/{book_id}")
+@app.get("/books/{book_id}", response_model=BookShow)
 def get_book(book_id: int, db: Session = Depends(get_db)):
     book = db.query(Book).filter(Book.id == book_id).first()
     if not book:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Book {book_id} not found.")
-    return book
+    open_book = BookShow(title=book.title, author=book.author)
+    return open_book
 
 @app.post("/books")
 def create_book(book: BookCreate, db: Session = Depends(get_db)):

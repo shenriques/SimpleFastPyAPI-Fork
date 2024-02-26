@@ -18,3 +18,6 @@ class BookCreate(BaseModel):
 class BookUpdate(BaseModel):
     title: str
     author: str
+
+class BookShow(BookUpdate):
+    pass
