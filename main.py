@@ -50,26 +50,26 @@ def delete_user_by_email(user_id: int, db: Session = Depends(get_db)):
 
 @app.get("/books", response_model=List[BookShow])
 def get_all_books(db: Session = Depends(get_db)):
-    book_objects = db.query(Book).all()
-    if (len(book_objects) == 0):
+    book_objects = db.query(Book).all() # obtain a list of all books in database
+    if (len(book_objects) == 0): # if the list is empty, raise a 404 error
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No books in database.")
-    books = [BookShow(title=book.title, author=book.author) for book in book_objects]
+    books = [BookShow(title=book.title, author=book.author) for book in book_objects] # create a BookShow object for each book in list
     return books
 
 @app.get("/books/{book_id}", response_model=BookShow)
 def get_book(book_id: int, db: Session = Depends(get_db)):
-    book = db.query(Book).filter(Book.id == book_id).first()
-    if not book:
+    book = db.query(Book).filter(Book.id == book_id).first() # search for the book by ID
+    if not book: # raise a 404 error if book of that ID doesnt exist
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Book {book_id} not found.")
-    open_book = BookShow(title=book.title, author=book.author)
+    open_book = BookShow(title=book.title, author=book.author) # create a BookShow object for the searched book
     return open_book
 
 @app.post("/books")
 def create_book(book: BookCreate, db: Session = Depends(get_db)):
     new_book = Book(**book.dict()) # unpack the request rather than manually assigning
     db.add(new_book)
-    db.commit()
-    db.refresh(new_book)
+    db.commit() # add new book to database
+    db.refresh(new_book) # retrieve the newly created book
     return new_book
 
 @app.put("/books/{book_id}")
