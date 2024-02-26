@@ -1,8 +1,8 @@
 from fastapi import FastAPI, HTTPException, Depends
 from sqlalchemy.orm import Session
 from app.database import get_db
-from app.models import User
-from app.schema import UserCreate, UserUpdate
+from app.models import User, Book
+from app.schema import UserCreate, UserUpdate, BookCreate
 
 
 
@@ -47,3 +47,11 @@ def delete_user_by_email(user_id: int, db: Session = Depends(get_db)):
     db.delete(db_user)
     db.commit()
     return {"message": "User deleted successfully"}
+
+@app.post("/books")
+def create_book(book: BookCreate, db: Session = Depends(get_db)):
+    new_book = Book(**book.dict()) # unpack the request rather than manually assigning
+    db.add(new_book)
+    db.commit()
+    db.refresh(new_book)
+    return book
