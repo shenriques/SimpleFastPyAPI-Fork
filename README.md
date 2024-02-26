@@ -161,7 +161,7 @@ Adds a new book to the system. The request body should include a JSON object wit
   - `description` (string, required): the description for the book
 
 ``` 
-curl -X POST http://localhost:8000/books -H 'Content-Type: application/json' -d '{"title":"WatchMen","author":"Alan Moore", "description": "Award winning graphic novel"}'
+curl -X POST http://localhost:8000/books/ -H 'Content-Type: application/json' -d '{"title":"WatchMen","author":"Alan Moore", "description": "Award winning graphic novel"}'
 ```
 
 Response:
