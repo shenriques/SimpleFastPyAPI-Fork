@@ -174,6 +174,60 @@ Response:
 }
 ```
 
+### Retrieve a list of all books
+
+
+Returns a list of all books in the system:
+
+```console
+curl http://localhost:8000/books/ -H "Accept: application/json"
+```
+Response:
+
+```json
+
+[
+    {
+        "author":"Alan Moore",
+        "description":"Award winning graphic novel",
+        "id":1,
+        "title":"WatchMen"
+    },
+    {
+        "author":"Isaac Asimov",
+        "description":"Award winning novel",
+        "id":2,
+        "title":"The Gods Themselves"
+    },
+    {
+        "author":"P D James",
+        "description":"Award winning novel",
+        "id":3,
+        "title":"The Children of Men"
+    }
+]
+
+
+```
+
+### Retrieve details for a specific book:
+
+Returns details for a specific book with the given book_id:
+
+```console
+curl http://localhost:8000/books/1 -H "Accept: application/json"
+```
+Response:
+```json
+{
+    "author":"Alan Moore",
+    "description":"Award winning graphic novel",
+    "id":1,
+    "title":"WatchMen"
+}
+```
+
+
 ## License
 
 This project is licensed under the GPL-3.0 License - see the LICENSE file for details.
