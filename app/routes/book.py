@@ -5,7 +5,7 @@ from .. models import Book
 from .. schema import BookCreate, BookUpdate, BookShow
 from typing import List
 
-router = APIRouter(prefix="/books")
+router = APIRouter(prefix="/books", tags=['Books'])
 
 @router.get("/", response_model=List[BookShow])
 def get_all_books(db: Session = Depends(get_db)):
